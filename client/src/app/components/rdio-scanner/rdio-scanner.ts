@@ -119,6 +119,7 @@ export interface RdioScannerEvent {
     livefeedMode?: RdioScannerLivefeedMode;
     map?: RdioScannerLivefeedMap;
     pause?: boolean;
+    scan?: boolean;
     playbackList?: RdioScannerPlaybackList;
     playbackPending?: number;
     queue?: number;

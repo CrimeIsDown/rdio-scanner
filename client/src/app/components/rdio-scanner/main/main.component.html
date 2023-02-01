@@ -158,6 +158,12 @@
             SELECT<br>TG
         </button>
     </div>
+    <div class="row">
+      <button class="rdio-button" (click)="scan()"
+          [ngClass]="{ off: !livefeedScan, on: livefeedScan }">
+          SCAN
+      </button>
+    </div>
 </div>
 <div class="rdio-help" *ngIf="email">
     <button mat-icon-button (click)="showHelp()">

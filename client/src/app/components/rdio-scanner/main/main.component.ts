@@ -100,6 +100,7 @@ export class RdioScannerMainComponent implements OnDestroy, OnInit {
     livefeedOffline = true;
     livefeedOnline = false;
     livefeedPaused = false;
+    livefeedScan = false;
 
     map: RdioScannerLivefeedMap = {};
 
@@ -237,6 +238,23 @@ export class RdioScannerMainComponent implements OnDestroy, OnInit {
             this.rdioScannerService.beep(this.livefeedOffline ? RdioScannerBeepStyle.Activate : RdioScannerBeepStyle.Deactivate);
 
             this.rdioScannerService.livefeed();
+
+            this.updateDimmer();
+        }
+    }
+
+    scan(): void {
+        if (this.auth) {
+            this.authFocus();
+
+        } else {
+            this.rdioScannerService.beep(!this.livefeedScan ? RdioScannerBeepStyle.Activate : RdioScannerBeepStyle.Deactivate);
+
+            this.rdioScannerService.scan();
+
+            if (this.livefeedOffline) {
+                this.rdioScannerService.livefeed();
+            }
 
             this.updateDimmer();
         }
@@ -452,6 +470,10 @@ export class RdioScannerMainComponent implements OnDestroy, OnInit {
 
         if ('pause' in event) {
             this.livefeedPaused = event.pause || false;
+        }
+
+        if ('scan' in event) {
+            this.livefeedScan = event.scan || false;
         }
 
         if ('queue' in event) {
