@@ -508,11 +508,10 @@ export class RdioScannerMainComponent implements OnDestroy, OnInit {
     }
 
     private formatFrequency(frequency: number | undefined): string {
-        return typeof frequency === 'number' ? frequency
+        return typeof frequency === 'number' ? (frequency / 1000000)
             .toString()
-            .padStart(9, '0')
-            .replace(/(\d)(?=(\d{3})+$)/g, '$1 ')
-            .concat(' Hz') : '';
+            .padEnd(7, '0')
+            .concat(' MHz') : '';
     }
 
     private isAfsSystem(talkgroupId: number): boolean {
